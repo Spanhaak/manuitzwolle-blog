@@ -9,6 +9,6 @@ This terraform builds the following components on Google Cloud Platform:
 
 This terraform uses two secrets to hide the actual path to my pub file and my ip address which I whitelisted to have access to the VM:
 
-![Firewall entry](/img/screen1.png)
+![Firewall entry](../terraform/img/screen1.png)
 
-![SSH Access](/img/screen2.png)
+![SSH Access](../terraform/img/screen2.png)
