@@ -39,6 +39,18 @@ resource "google_compute_firewall" "allow_ssh" {
   }
 }
 
+resource "google_compute_firewall" "https" {
+  name          = "https"
+  network       = "manuitzwolle-vpc"
+  target_tags   = ["https"]
+  source_ranges = [var.ip]
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80","443","2368"]
+  }
+}
+
 resource "google_compute_firewall" "allow_oslogin" {
   name          = "allow-oslogin"
   network       = "manuitzwolle-vpc"
@@ -64,12 +76,12 @@ resource "google_compute_address" "static" {
 # Create the VM
 #
 data "google_compute_image" "debian_image" {
-  family  = "debian-11"
-  project = "debian-cloud"
+  family  = "ubuntu-2004-lts"
+  project = "ubuntu-os-cloud"
 }
 
 resource "google_compute_instance" "instance_with_ip" {
-  name         = "manuitzwolle-instance"
+  name         = "muz"
   machine_type = "e2-small"
   zone         = "europe-west4-a"
   tags = ["allow-ssh", "allow-oslogin"]
